@@ -1,6 +1,7 @@
 import random
 import time
 from save import *
+# Imports savefile data
 
 # Main menu
 init0=("Haven Town\nKevin Roadarmel\n\nEnter C to Coninute\n\nEnter N for New Game\n\n")
@@ -18,6 +19,7 @@ inputContinue = "\n\nInput to continue"
 
 answer = ""
 running = True
+enemiesKilled = 0
 
 
 
@@ -30,6 +32,7 @@ class enemy():
         self.damage = damage
         self.move = move
         self.move2 = move2
+        
 # Enemy list
 steelwulf = enemy("Steelwulf", 100, 100, 15, "Slash", "Steel Claw")
 warpdemon = enemy("Warpdemon", 23, 100, 25, "Blarp", "Timewarp")
@@ -49,7 +52,7 @@ def save():
     
 def confirmName():
   global petname
-  petname = input("Enter your xenomorph's name\n")
+  petname = input("Enter your xenomorph's name:\n")
   answer = input(petname + "? Y or N\n")
   if answer.upper() == "Y" and petname != "":
    print("Pet name confirmed as " + petname + "\n")
@@ -63,11 +66,35 @@ def stepDrama():
     time.sleep(0.5)
     num = num + 1
     
+    
+def levelUp():
+    global enemiesKilled
+    global maxhealth
+    global health
+    healthQ = input("You have protected yourself against " + str(enemiesKilled) + " xenomorph(s)\n\nWould you like to level up your health?\n\nY or N\n")
+    if healthQ.upper() == "Y":
+        maxhealth = maxhealth + (enemiesKilled * 10)
+        print("Your max health is now " + str(maxhealth))
+    elif healthQ.upper() == "N":
+        damageQ = input("\nWould you like to level up your damage instead?\n")
+        if damageQ.upper() == "Y":
+            damage = damage + (2*enemiesKilled)
+            print("Your damage is now at " + str(damage))
+        else:
+            print("Skipped leveling up.")
+            return
+    else:
+        levelUp()
+  
+  
+    
 def fight(enemy):
+  # Doesn't work without earlier referenced variables being global'd
   global health
   global petname
   global damage
   global maxhealth
+  global enemiesKilled
   while health > 0 and enemy.health > 0:
     askFight = input("\n" + petname + " Health: " + str(int(health)) + "/" + str(maxhealth) + "\n" + enemy.name + " Health: " + str(int(enemy.health)) + "/" + str(enemy.maxhealth) + "\nEnter 1 to use " + movename + " (1x damage)\nEnter 2 to use " + movename2 + " (2x damage)\n\n")
     
@@ -77,7 +104,9 @@ def fight(enemy):
         if number.isdigit():
           number = int(number)
         else:
-          fight()
+          fight(enemy)
+        
+        number = int(number)
         numAns = random.randrange(1,10)  
         enemyAns = random.randrange(1,10)
         
@@ -122,9 +151,15 @@ def fight(enemy):
   if enemy.health <= 0:
     print("\nYou have won the battle against " + enemy.name + "!\n")
     health = maxhealth
+    enemy.health = enemy.maxhealth
+    enemiesKilled += 1
   elif health <= 0:
     print("\n\nGame over.")
     quit()
+
+
+
+
 
 
 cONTrue = True
@@ -173,11 +208,11 @@ while running:
         hasAppeared = "\nA " + fighter.name + " has appeared!"
         input(hasAppeared + inputContinue)
         fight(fighter)
+        levelUp()
         stage = 2
         save()
     
     elif stage == 2:
-        input(init7 + inputContinue)
         stepDrama()
         
         stage = 3
@@ -192,10 +227,13 @@ while running:
         hasAppeared = "\nA " + fighter.name + " has appeared!"
         input(hasAppeared + inputContinue)
         fight(fighter)
-        txt2 = "\nYou trek onward to Haven Village...\n"
+        levelUp()
+        txt2 = "\nYou trek onward to Haven Village..."
         input(txt2 + inputContinue)
         stage = 4
         save()
         running = False
+    else:
+        print("Error: Please try uninstalling game files and reinstalling the game to continue.")
 
 quit()
