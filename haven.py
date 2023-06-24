@@ -4,14 +4,15 @@ from save import *
 
 # Main menu
 init0=("Haven Town\nKevin Roadarmel\n\nEnter C to Coninute\n\nEnter N for New Game\n\n")
-# Beginning
+
+
+# Beginning texts
 init1 = "\n\nHaven Town\nKevin Roadarmel\n\nAliens have depleted Earth of its resources and left behind creatures known as xenomorphs, which humanity has befriended, in order to save themselves from the brink of extinction."
 init2 = "\nAs one of the lone survivors, you must travel to Haven Village to meet with the others, but you will first have to traverse...\n\nThe Forest."
 init3 = "\nYou awaken from your slumber in your makeshift home made of tree limbs and leaves, your xenomorph pet by your side.\nWhat was her name again?\n"
-init4 = "\nYou emerge into the cool-weathered and dark world of The Forest. Despite being populated by millions of creatures, you can only hear the rustling of your footsteps.\n"
-init5 = "\nYou trek deeper and deeper - until suddenly..."
-# init6 goes with first fight 
-init7 = "\nYou trek onward to Haven Village...\n"
+
+
+# Used so I don't have to retype that everytime.
 inputContinue = "\n\nInput to continue"
 
 
@@ -109,7 +110,7 @@ def fight(enemy):
         elif dice == 3:
             print("You rolled a " + str(dice) + "!\nNothing happened!")
         elif dice == 4:
-            print("You rolled a " + str(dice) + "!\n" + petname + " inleft herself open to an attack, but countered it!")
+            print("You rolled a " + str(dice) + "!\n" + petname + " left herself open to an attack, but countered it!")
             health -= 0.5*enemy.damage
             enemy.health -= damage
         elif dice == 5:
@@ -159,27 +160,41 @@ while running:
         save()
 
     elif stage == 1:
-        input(init4 + inputContinue)
+        txt0 = "\nYou emerge into the cool-weathered and dark world of The Forest. Despite being populated by millions of creatures, you can only hear the rustling of your footsteps.\n"
+        input(txt0 + inputContinue)
         stepDrama()
-        input(init5 + inputContinue)
-        enemyname = "Steelwulf"
-        init6 = "\nA " + enemyname + " has appeared!"
-        input(init6 + inputContinue)
-
-        fight(steelwulf)
+        txt1 = "\nYou trek deeper and deeper - until suddenly..."
+        input(txt1+ inputContinue)
+        enemyChoice = random.randrange(1,10)
+        if enemyChoice == 3 or enemyChoice == 7 or enemyChoice == 4 or enemyChoice == 2:
+            fighter = warpdemon
+        else:
+            fighter = steelwulf
+        hasAppeared = "\nA " + fighter.name + " has appeared!"
+        input(hasAppeared + inputContinue)
+        fight(fighter)
         stage = 2
         save()
     
     elif stage == 2:
         input(init7 + inputContinue)
         stepDrama()
-
-        enemyname = "Warpdemon"
-        init6 = "\nA " + enemyname + " has appeared!"
-        input(init6 + inputContinue)
-        fight(warpdemon)
-        input(init7 + inputContinue)
+        
         stage = 3
+        save()
+    elif stage == 3:
+        stepDrama()
+        enemyChoice = random.randrange(1,10)
+        if enemyChoice == 3 or enemyChoice == 7 or enemyChoice == 4 or enemyChoice == 2:
+            fighter = warpdemon
+        else:
+            fighter = steelwulf
+        hasAppeared = "\nA " + fighter.name + " has appeared!"
+        input(hasAppeared + inputContinue)
+        fight(fighter)
+        txt2 = "\nYou trek onward to Haven Village...\n"
+        input(txt2 + inputContinue)
+        stage = 4
         save()
         running = False
 

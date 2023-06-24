@@ -1,4 +1,4 @@
-petname = "moonlight"
+petname = "2"
 health = 100
 maxhealth = 100
 damage = 50
