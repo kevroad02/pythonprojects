@@ -1,6 +1,6 @@
-petname = "j"
+petname = "m"
 health = 100
-maxhealth = 110
+maxhealth = 100
 damage = 50
 movename ="Chomp"
 movename2 ="Buzz"

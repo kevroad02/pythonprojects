@@ -1,7 +1,7 @@
 import random
 
 titlescreen = input("PRISON LINE\nKevin Roadarmel\n\nEnter to start: ")
-askRules = input("\nRoll digital dice, land on special tiles, chase down prisoners, or run from cops, down to the end of the\nLINE!\n\nEnter to continue: ")
+askRules = input("\nRoll digital dice, land on special tiles, chase down prisoners, or run from cops, down to the end of the\nLINE!\n\nThe object of the game is to get down to 0 steps and escape the prison. There are 20 steps in total, good luck!\n\nEnter to continue: ")
 
 diceNum = 0
 run = True
@@ -47,7 +47,7 @@ class R2:
 
 def roll():
     global diceNum
-    dice = random.randrange(1,7)
+    dice = random.randrange(1,15)
     diceNum = dice
     
     
@@ -69,60 +69,92 @@ def checkWin():
     
     
 def characterChoice():
+    global lastMoved
     charChoice = input("\n" + onePiece.color + " has rolled a " + str(diceNum) + "\nWould you like to move " + onePiece.name + " (Step: " + str(onePiece.pos) + ") or " + twoPiece.name + " (Step: " + str(twoPiece.pos) + ")\n")
-    if charChoice.upper() == onePiece.name:
+    if charChoice.upper() == onePiece.name or charChoice == "1":
         if onePiece.pos <=0:
             print("\n"+onePiece.name + " is at the finish line! Cannot be moved.")
+            onePiece.pos = 0
             characterChoice()
-        onePiece.pos = onePiece.pos - diceNum
-        print("\n" + onePiece.name + " is now on step " + str(onePiece.pos))
-        lastMoved = onePiece
-    elif charChoice.upper() == twoPiece.name:
+        
+        else:
+            onePiece.pos = onePiece.pos - diceNum
+            print("\n" + onePiece.name + " is now on step " + str(onePiece.pos))
+            lastMoved = onePiece
+    elif charChoice.upper() == twoPiece.name or charChoice == "2":
         if twoPiece.pos <=0:
             print("\n"+twoPiece.name + " is at the finish line! Cannot be moved.")
             characterChoice()
-        twoPiece.pos = twoPiece.pos - diceNum
-        print("\n" + twoPiece.name + " is now on step " + str(twoPiece.pos))
-        lastMoved = twoPiece
+        else:
+            twoPiece.pos = twoPiece.pos - diceNum
+            print("\n" + twoPiece.name + " is now on step " + str(twoPiece.pos))
+            lastMoved = twoPiece
     else:
         print("Please type in either " + onePiece.name + " or " + twoPiece.name + "!")
         characterChoice()
         
+        
+        
+        
+        
+        
+        
 def checkTile():
+    global lastMoved
     compUser = B1
     if lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
-    print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
-    compUser.pos = 20
-    
-    
+        print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
+        compUser.pos = 20
     
     compUser = B2
-    elif lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
-    print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
-    compUser.pos = 20
-    
-    
+    if lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
+        print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
+        compUser.pos = 20
     
     compUser = G1
-    elif lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
-    print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
-    compUser.pos = 20
+    if lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
+        print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
+        compUser.pos = 20
     
     compUser = G2
-    elif lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
-    print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
-    compUser.pos = 20
+    if lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
+        print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
+        compUser.pos = 20
     
     compUser = R1
-    elif lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
-    print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
-    compUser.pos = 20
+    if lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
+        print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
+        compUser.pos = 20
     
     compUser = R2
-    elif lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
-    print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
-    compUser.pos = 20
+    if lastMoved.role == "Cop" and lastMoved.pos == compUser.pos and lastMoved.color != compUser.color:
+        print("\n" + lastMoved.color + " has put " + compUser.name + " back to prison!")
+        compUser.pos = 20
+
+
+
+
+
+
+
+def specialTile():
+    global lastMoved
+    # Divisible by 3
+    if (lastMoved.pos%3) == 0 and lastMoved.pos != 0:
+        print("\n" + lastMoved.name + " has landed on a prison tile! They have been moved back to prison")
+        lastMoved.pos = 20
+    if lastMoved.pos%7 == 0:
+        print("\n" + lastMoved.name + " gets to go again!")
+        roll()
+        characterChoice()
+        checkTile()
+        specialTile()
+        
     
+        
+        
+        
+        
         
 # Beginning of game, role selection
 threeChoices = random.randrange(1,4)
@@ -165,13 +197,21 @@ while run:
     twoPiece = B2
     characterChoice()
     checkTile()
+    specialTile()
+    checkWin()
+    roll()
     onePiece = G1
     twoPiece = G2
     characterChoice()
     checkTile()
+    specialTile()
+    checkWin()
+    roll()
     onePiece = R1
     twoPiece = R2
     characterChoice()
     checkTile()
+    specialTile()
+    checkWin()
     
     

@@ -71,12 +71,13 @@ def levelUp():
     global enemiesKilled
     global maxhealth
     global health
+    global damage
     healthQ = input("You have protected yourself against " + str(enemiesKilled) + " xenomorph(s)\n\nWould you like to level up your health?\n\nY or N\n")
     if healthQ.upper() == "Y":
         maxhealth = maxhealth + (enemiesKilled * 10)
         print("Your max health is now " + str(maxhealth))
     elif healthQ.upper() == "N":
-        damageQ = input("\nWould you like to level up your damage instead?\n")
+        damageQ = input("\nWould you like to level up your damage instead?\n\nY or N\n")
         if damageQ.upper() == "Y":
             damage = damage + (2*enemiesKilled)
             print("Your damage is now at " + str(damage))
