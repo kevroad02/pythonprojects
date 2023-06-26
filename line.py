@@ -79,6 +79,8 @@ def characterChoice():
         
         else:
             onePiece.pos = onePiece.pos - diceNum
+            if onePiece.pos < 0:
+                onePiece.pos = 0
             print("\n" + onePiece.name + " is now on step " + str(onePiece.pos))
             lastMoved = onePiece
     elif charChoice.upper() == twoPiece.name or charChoice == "2":
@@ -87,6 +89,8 @@ def characterChoice():
             characterChoice()
         else:
             twoPiece.pos = twoPiece.pos - diceNum
+            if twoPiece.pos < 0:
+                twoPiece.pos = 0
             print("\n" + twoPiece.name + " is now on step " + str(twoPiece.pos))
             lastMoved = twoPiece
     else:

@@ -87,7 +87,13 @@ def levelUp():
     else:
         levelUp()
   
-  
+def yOrN(answer):
+    if answer.upper() == "Y":
+        return True
+    if answer.upper() == "N":
+        return False
+    else:
+        yOrN(answer)
     
 def fight(enemy):
   # Doesn't work without earlier referenced variables being global'd
@@ -214,8 +220,10 @@ while running:
         save()
     
     elif stage == 2:
+        txt2 = input("\nYou stumble upon a tattered journal layed upwards on a tree\n\nDo you open it?\nY or N: ")
+        if yOrN(txt2) == True:
+            input("Test \n\n" + inputContinue)
         stepDrama()
-        
         stage = 3
         save()
     elif stage == 3:
@@ -229,8 +237,8 @@ while running:
         input(hasAppeared + inputContinue)
         fight(fighter)
         levelUp()
-        txt2 = "\nYou trek onward to Haven Village..."
-        input(txt2 + inputContinue)
+        txt4 = "\nYou trek onward to Haven Village..."
+        input(txt4 + inputContinue)
         stage = 4
         save()
         running = False

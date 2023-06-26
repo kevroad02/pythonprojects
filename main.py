@@ -2,12 +2,12 @@ import pygame
 import time
 import random
 
-WIDTH, HEIGHT = 800,600
+WIDTH, HEIGHT = 400,300
 WIN= pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Space Dodge")
 
-# Loading background image
-BG= pygame.image.load("/storage/emulated/0/Documents/Termux/mainPyFolder/space.png")
+# Loading background image with scale as 800,600 (does not preserve aspect ratio)
+BG= pygame.transform.scale(pygame.image.load("/storage/emulated/0/Documents/Termux/mainPyFolder/space.png"), (WIDTH, HEIGHT))
 
 def draw():
 	# Blit is method for drawing
