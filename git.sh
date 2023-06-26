@@ -3,7 +3,7 @@ cd /storage/emulated/0/Documents/Termux/
 git add .
 git config --global user.name "Kevin Roadarmel" 
 git config --global user.email "goldenrobloxian@gmail.com"
-echo Enter a concise summary of what you edited
+echo Enter a concise summary of what you edited with underscores as spaces
 read varname
 git commit -m $varname
 echo Pushed to GitHub with update name $varname
