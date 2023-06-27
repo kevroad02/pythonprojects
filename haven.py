@@ -10,7 +10,7 @@ init0=("Haven Town\nKevin Roadarmel\n\nEnter C to Coninute\n\nEnter N for New Ga
 # Beginning texts
 init1 = "\n\nHaven Town\nKevin Roadarmel\n\nAliens have depleted Earth of its resources and left behind creatures known as xenomorphs, which humanity has befriended, in order to save themselves from the brink of extinction."
 init2 = "\nAs one of the lone survivors, you must travel to Haven Village to meet with the others, but you will first have to traverse...\n\nThe Forest."
-init3 = "\nYou awaken from your slumber in your makeshift home made of tree limbs and leaves, your xenomorph pet by your side.\nWhat was her name again?\n"
+init3 = "\nYou awaken from your slumber in  your makeshift home made of tree limbs and leaves, your xenomorph pet by your side.\nWhat was her name again?\n"
 
 
 # Used so I don't have to retype that everytime.
@@ -153,7 +153,7 @@ def fight(enemy):
             print("You rolled a " + str(dice) + "!\n" + petname + " missed the enemy " + enemy.name+"!")
         elif dice == 6:
             print("You rolled a " + str(dice) + "!\n75% of " + enemy.name +"\'s health is gone!")
-            enemy.health -= 0.75 * enemy.health
+            enemy.health -= 0.75 * enemy.maxhealth
         
   if enemy.health <= 0:
     print("\nYou have won the battle against " + enemy.name + "!\n")

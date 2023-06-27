@@ -51,6 +51,9 @@ def approximate(wk):
             intPut("\nEnter how many hours you've worked: ")
             # intPut responses are always converted to nums so dwHours now equals how many hours user has worked
             dwHours = num
+        elif hoursWorked.isnumeric():
+            intPut("\nEnter how many hours you've worked: ")
+            dwHours=num
         else:
             # daysWorked function goes through each day and asked them how mant hours they've worked on that dau
             daysWorked()
@@ -61,6 +64,9 @@ def approximate(wk):
     elif wk == "BW":
         hoursWorked = input("\nDo you know how many hours you've worked over these two week? Y or N: ")
         if hoursWorked.upper() == "Y":
+            intPut("\nEnter how many hours you've worked: ")
+            dwHours = num
+        elif hoursWorked.isnumeric():
             intPut("\nEnter how many hours you've worked: ")
             dwHours = num
         else:
