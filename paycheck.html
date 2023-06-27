@@ -1,59 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-        <title> Paycheck Approximator </title>
-    
-    <!-- Pyscript -->
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-    <!--<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />-->
-    
-    <!-- bootstrap for styling , Pyscript can also be used for styling instead of bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>  
-    
-</head>
+        <title>Paycheck Approximator</title>
+
 <body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<!-- write your Python code in py-script tag -->
-<py-script>
-
-def calc(wk1, wk2, hrly):
-    amount = ((wk1+wk2) * hrly)
-    taxAmount = amount *.13
-    return amount - taxAmount
-        
+<script>
+function calc(wk1, wk2, hrly){
+	var tax = .13;
+	<!-- Tax variable is percentage subtracted off gross paycheck, change if wanted -->
+    var amount = ((+wk1 + +wk2) * hrly);
+    var taxAmount = amount * tax;
+    return amount - taxAmount;
+    }
     
-def calculate():
+function calculate(){
 
-    week1 = Element('week1').value;
-    week2 = Element('week2').value
-    hourly = Element('hourly').value
-    result = calc(week1, week2, hourly)
-    pyscript.write("answer",result)    
-</py-script>    
+    var week1 = document.getElementById('week1').value;
+    var week2 = document.getElementById('week2').value;
+    var hourly = document.getElementById('hourly').value;
+    var result = calc(week1, week2, hourly);
+    document.getElementById('answer').innerHTML = result;
+    }
+</script>    
 
     <div class="container">
-        
+
         <h1 class="text-center">
-            Paycheck Approximator
+            Paycheck Approximator (13% Tax)
         </h1>
-        <br />
-        <p><h3>Week 1 Hours:</h3>
+        <h2 class ="text-center">
+			Kevin Roadarmel
+		</h2>
+    
+        <p><h3>Hours Worked (Week 1):</h3>
         <input id="week1" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Enter hours worked in Week 1" /></p>
-        <p><h3>Week 2:</h3>
+        <p><h3>Hours Worked (Week 2, if applicable):</h3>
         <input id="week2" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="(If applicable) Enter hours worked in Week 2" /></p>
         <p><h3>Hourly Salary:</h3>
         <input id="hourly" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Enter your hourly salary" /></p>
-        <center>
-            <button id="convert" type="submit"  class="btn btn-info" py-click="calculate()">Calculate</button>
-
-        </center>
+            <button id="convert" type="submit"  class="btn btn-info" onclick="calculate()">Calculate</button>
         
         <p>
+		<br>
         <h4>Result:</h4>
-        <textarea id="answer" class="form-control" rows="2" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Result"></textarea></p>
+        <textarea id="answer" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Result"></textarea></p>
 
         
     </div>    
