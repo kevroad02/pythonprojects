@@ -9,7 +9,7 @@ def inSpace(stringVar):
 
 def enterName():
     name = input("These are the survivors of humanities extinction. One day, you were brought a flyer from your pet xenomorph ... what was her name again?")
-    if name == ""
+    if name == "":
         print("Name cannot be blank!")
         enterName()
 

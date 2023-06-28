@@ -60,7 +60,7 @@ def approximate(wk):
         perHourQ = intPut("\nWhat is your salary per hour?: ")
         perHour = num
         # Hourly salary times hours worked minus taxes
-        print("\nYou will be paid $" + str(((perHour*dwHours) - (num*tax))))
+        print("\nYou will be paid $" + str(((perHour*dwHours) - ((perHour*dwHours)*tax))))
     elif wk == "BW":
         hoursWorked = input("\nDo you know how many hours you've worked over these two week? Y or N: ")
         if hoursWorked.upper() == "Y":
@@ -77,7 +77,7 @@ def approximate(wk):
             daysWorked()
         perHourQ = intPut("\nWhat is your salary per hour?: ")
         perHour = num
-        print("\nYou will be paid $" + str(((perHour*dwHours) - (num*tax))))
+        print("\nYou will be paid $" + str(((perHour*dwHours) - ((perHour*dwHours)*tax))))
     
 
 
