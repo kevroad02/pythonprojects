@@ -8,10 +8,13 @@ def inSpace(stringVar):
     return input(stringVar + "\n\n" + "Input to continue\n\n")
 
 def enterName():
-    name = input("These are the survivors of humanities extinction. One day, you were brought a flyer from your pet xenomorph ... what was her name again?")
-    if name == "":
-        print("Name cannot be blank!")
-        enterName()
+    name = input("\n\nThese are the survivors of humanities extinction. One day, you were brought a flyer from your pet xenomorph ... what was her name again?\n\n")
+    
+    # Testing out match and case because I saw it in a Clear Code video, doesn't fit this situation
+    match name:
+        case "":
+          print("Name cannot be blank!")
+          enterName()
 
 
 while run == True:

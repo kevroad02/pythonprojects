@@ -13,16 +13,35 @@ def intPut(question):
     global num
     # Gets string intPut to ask the questions 
     theInput = input(question)
-    # If input is an integer
-    if theInput.isnumeric():
-        num = int(theInput)
-    else:
-        print("\nPlease enter a number without decimals.")
-        # Re-asks question if false
-        intPut(question)
     
-
-
+    # If input is an integer
+    try:
+        float(theInput)
+        num = float(theInput)
+        return True
+    except ValueError:
+        print("\nPlease enter a number.")
+        intPut(question)
+        
+        # Re-asks question if false
+        
+    
+def startOfProgram():
+  weekAmount = input("Pennsylvania Paycheck Approximator (13% Tax)\nKevin Roadarmel\n\nEnter W if you get paid weekly, or BW for biweekly: ")
+  if weekAmount.upper() == "BW":
+     print("\nBiweekly has been selected")
+     wkOrBi = "BW"
+      # Sends biweekly to function 
+     approximate(wkOrBi)
+  elif weekAmount.upper() == "W":
+      print("\nWeekly has been selected")
+     # Sends weekly to function
+      wkOrBi = "W"
+      approximate(wkOrBi)
+  else:
+    print("\n\nPlease enter W or BW\n\n")
+    startOfProgram()
+    
 
 def daysWorked():
     global dwHours
@@ -77,20 +96,12 @@ def approximate(wk):
             daysWorked()
         perHourQ = intPut("\nWhat is your salary per hour?: ")
         perHour = num
-        print("\nYou will be paid $" + str(((perHour*dwHours) - ((perHour*dwHours)*tax))))
+        result = (((perHour*dwHours) - ((perHour*dwHours)*tax)))
+        result = round(result, 2)
+        print("\nYou will be paid $" + str(result))
     
 
 
 
 # Beginning of program, asks if looking for weekly or biweekly results
-weekAmount = input("Pennsylvania Paycheck Approximator (13% Tax)\nKevin Roadarmel\n\nEnter W if you get paid weekly, or BW for biweekly: ")
-if weekAmount.upper() == "BW":
-    print("\nBiweekly has been selected")
-    wkOrBi = "BW"
-    # Sends biweekly to function 
-    approximate(wkOrBi)
-if weekAmount.upper() == "W":
-    print("\nWeekly has been selected")
-    # Sends weekly to function
-    wkOrBi = "W"
-    approximate(wkOrBi)
+startOfProgram()
